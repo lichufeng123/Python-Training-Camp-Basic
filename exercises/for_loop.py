@@ -6,6 +6,8 @@
 
 请补全下面的函数，使用for循环计算从1到n的所有整数之和。
 """
+import os
+
 
 def sum_numbers(n):
     """
@@ -18,4 +20,5 @@ def sum_numbers(n):
     - 从1到n的所有整数之和
     """
     # 请在下方编写代码
-    pass 
+    pass
+

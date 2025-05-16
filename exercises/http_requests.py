@@ -7,7 +7,7 @@
 
 请补全下面的函数，实现发送HTTP请求并处理响应的功能。
 """
-
+import requests
 def get_website_content(url):
     """
     发送GET请求获取网页内容
@@ -26,7 +26,9 @@ def get_website_content(url):
     # 请在下方编写代码
     # 使用requests.get()发送GET请求
     # 返回包含状态码、内容和头部信息的字典
-    pass
+
+    responses = requests.get(url=url)
+    return responses
 
 def post_data(url, data):
     """
@@ -47,4 +49,14 @@ def post_data(url, data):
     # 请在下方编写代码
     # 使用requests.post()发送POST请求
     # 返回包含状态码、响应JSON和成功标志的字典
-    pass 
+    json_data = {"userNo": "admin", "password": "123456", "deviceType": "web"}
+    Login_Url = 'https://nebula.regentxcx.com/manager/auth/accessToken'
+    Authorization = requests.post(url=Login_Url, json=json_data).json().get("data")["token"]
+    Refreshtoken = 'f4f1d9c9b01b486e9f7a7f9d8256f235'
+    headers = {"Authorization": Authorization, "Refreshtoken": Refreshtoken}
+    return requests.post(url=url,json=data,headers=headers)
+
+geturl='http://httpbin.org/get'
+print(get_website_content(geturl))
+
+print(post_data('https://nebula.regentxcx.com/manager/member/policy/page',{"data":{"memberSystemId":"","moduleId":"120010"},"pageSize":15,"page":1,"moduleId":"120010"}))
