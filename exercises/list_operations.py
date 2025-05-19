@@ -21,37 +21,17 @@ def student_list_operations(students, operation, *args):
     """
     # 请在下方编写代码
     new_list = list(students)
-
     if operation == "add":
-        # 添加操作：args[0]为要添加的学生对象
         new_list.append(args[0])
-
     elif operation == "remove":
-        # 删除操作：args[0]为要删除学生的id
-        target_id = args[0]
-        for i in range(len(new_list)):
-            if new_list[i].get('id') == target_id:
-                del new_list[i]
-                break  # 只删除第一个匹配项
-
+        target = args[0]
+        try:
+            new_list.remove(target)  # 直接删除匹配元素
+        except ValueError:
+            pass  # 元素不存在时不处理
     elif operation == "update":
-        # 更新操作：args[0]为学生id，args[1]为更新字段的字典
-        target_id, update_data = args[0], args[1]
-        for student in new_list:
-            if student.get('id') == target_id:
-                student.update(update_data)
-                break
-
+        index, new_name = args[0], args[1]
+        if 0 <= index < len(new_list):
+            new_list[index] = new_name
     return new_list
 
-students = [{'id': 1, 'name': 'Alice'}, {'id': 2, 'name': 'Bob'}]
-
-# 添加学生
-students = student_list_operations(students, 'add', {'id': 3, 'name': 'Charlie'})
-
-# 删除id=2的学生
-students = student_list_operations(students, 'remove', 2)
-
-# 更新id=1的学生姓名
-students = student_list_operations(students, 'update', 1, {'name': 'Alicia'})
-print(students)
