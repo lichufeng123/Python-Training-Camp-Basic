@@ -20,18 +20,14 @@ def student_list_operations(students, operation, *args):
     - 操作后的学生列表
     """
     # 请在下方编写代码
-    new_list = list(students)
     if operation == "add":
-        new_list.append(args[0])
+        students.append(args[0])
     elif operation == "remove":
-        target = args[0]
-        try:
-            new_list.remove(target)  # 直接删除匹配元素
-        except ValueError:
-            pass  # 元素不存在时不处理
+        if args[0] in students:
+            students.remove(args[0])
     elif operation == "update":
-        index, new_name = args[0], args[1]
-        if 0 <= index < len(new_list):
-            new_list[index] = new_name
-    return new_list
+        if args[0] in students:
+            index = students.index(args[0])
+            students[index] = args[1]
+    return students
 
