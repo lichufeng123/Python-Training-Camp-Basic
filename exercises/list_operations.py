@@ -25,9 +25,11 @@ def student_list_operations(students, operation, *args):
     elif operation == "remove":
         if args[0] in students:
             students.remove(args[0])
+    
     elif operation == "update":
         if args[0] in students:
             index = students.index(args[0])
             students[index] = args[1]
+            
     return students
-
+    pass 

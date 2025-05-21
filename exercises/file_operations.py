@@ -6,8 +6,6 @@
 
 请补全下面的函数，实现文件的读取和写入功能。
 """
-from pathlib import Path
-
 
 def read_file(file_path):
     """
@@ -21,14 +19,12 @@ def read_file(file_path):
     """
     # 请在下方编写代码
     # 使用open()函数打开文件并读取内容
-
     try:
-        with open(file_path, "r", encoding="UTF-8") as f:
-            return f.read()
-    except FileNotFoundError:
-        print("文件不存在！")
-    except UnicodeDecodeError:
-        print("检查文件编码格式！")
+        with open(file_path, 'r',encoding = 'utf-8')as file:
+            return file.read()
+    except Exception as e:
+        return f"fail:{e}"
+    pass
 
 def write_file(file_path, content):
     """
@@ -43,18 +39,10 @@ def write_file(file_path, content):
     """
     # 请在下方编写代码
     # 使用with语句和open()函数写入内容到文件
-    try:
-        path = Path(file_path)
-        # 自动创建父目录（关键修复点）
-        path.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(file_path, "w", encoding="UTF-8") as f:
-            f.write(content)
-            return True
+    try: 
+        with open(file_path,'w', encoding= 'utf-8')as file:
+            file.write(content)
+        return True
     except Exception as e:
-        print(f"错误详情：{str(e)}")  # 增加错误日志
         return False
-
-
-print(write_file("test/data_types.py","hello world"))
-print(read_file("test/data_types.py"))
+    pass 

@@ -19,12 +19,10 @@ def find_first_even(numbers):
     - 列表中的第一个偶数，如果没有偶数则返回None
     """
     # 请在下方编写代码
-    index = 0
-    while index < len(numbers):
-        if numbers[index] % 2 == 0:
-            return numbers[index]
-        index += 1
+    i = 0
+    while i < len(numbers):
+        if numbers[i] % 2 == 0:
+            return numbers[i]
+        i += 1
     return None
-print(find_first_even([1,3,5,7,8,9]))  # 输出:8
-print(find_first_even([9,11,13]))      # 输出:None
-print(find_first_even([]))             # 输出:None
+    pass 

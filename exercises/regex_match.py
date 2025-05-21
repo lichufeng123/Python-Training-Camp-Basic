@@ -16,9 +16,10 @@ def find_emails(text):
         list: 文本中找到的所有电子邮件地址的列表
     """
     # 实现你的代码: 使用正则表达式查找所有邮箱地址
+    pattern = r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+    return re.findall(pattern, text)
     # 邮箱格式通常为: username@domain.com
-    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    return re.findall(email_pattern, text)
+    pass
 
 
 def is_valid_phone_number(phone):
@@ -38,7 +39,8 @@ def is_valid_phone_number(phone):
     """
     # 实现你的代码: 验证手机号码是否合法
     pattern = r'^1[3-9]\d{9}$'
-    return bool(re.match(pattern, phone))
+    return re.fullmatch(pattern, phone) is not None
+    pass
 
 
 def extract_urls(text):
@@ -52,20 +54,7 @@ def extract_urls(text):
         list: 文本中找到的所有URL的列表
     """
     # 实现你的代码: 使用正则表达式提取所有URL
+    pattern = r'https?://[^\s,, ]+'
+    return re.findall(pattern, text)
     # 需要考虑http://和https://开头的URL
-    url_pattern = r'https?://[^\s]+'
-    return re.findall(url_pattern, text)
-
-
-# 测试
-# 邮箱测试
-text = "联系邮箱：service@company.com 或 support@mail.cn"
-print(find_emails(text))  # ['service@company.com', 'support@mail.cn']
-
-# 手机号验证
-print(is_valid_phone_number("13800138000"))  # True
-print(is_valid_phone_number("12345abc"))     # False
-
-# URL提取
-text = "官网：https://www.example.com 资源：http://download.site/file.pdf"
-print(extract_urls(text))  # ['https://www.example.com', 'http://download.site/file.pdf']
+    pass 

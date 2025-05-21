@@ -19,16 +19,5 @@ def format_student_info(name, age):
     - 格式化后的学生信息字符串
     """
     # 请在下方编写代码
-    try:
-        return f"学生信息 | 姓名：{name.upper():^12} | 年龄：{int(age):03d} 岁"
-    except ValueError:
-        return "错误：年龄必须是整数"
-
-print(format_student_info("张三", 18))
-# 输出：学生信息 | 姓名：张三        | 年龄：018 岁
-
-print(format_student_info("李li", "20"))
-# 进阶版输出：学生信息 | 姓名：   LI     | 年龄：020 岁
-
-print(format_student_info("王五", "abc"))
-# 进阶版输出：错误：年龄必须是整数
+    return f"姓名: {name},年龄: {age}"
+    pass 

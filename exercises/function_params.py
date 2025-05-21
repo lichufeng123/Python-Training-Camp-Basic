@@ -21,13 +21,10 @@ def calculate_area(length, width=None):
     - 计算得到的面积
     """
     # 请在下方编写代码
-
+  
     if width == None:
-        area = length*length
-        return area
-    else:
-        area = length * width
-        return area
+        return  length * length
 
-print(f"面积是{calculate_area(7,6)}")
-print(f"面积是{calculate_area(7)}")
+    else: 
+        return length * width
+    pass 

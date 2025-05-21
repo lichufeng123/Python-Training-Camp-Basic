@@ -26,10 +26,21 @@ def get_website_content(url):
     # 请在下方编写代码
     # 使用requests.get()发送GET请求
     # 返回包含状态码、内容和头部信息的字典
-
-    responses = requests.get(url=url)
-    return responses
-
+    try:
+        response = requests.get(url)
+        return {
+            'status_code': response.status_code,
+            'content': response.text,
+            'headers': dict(response.headers)
+            }
+    except Exception as e:
+        return {
+            'status_code':0,
+            'content':f"fail:{e}",
+            'headers': {}
+            }
+    pass
+    
 def post_data(url, data):
     """
     发送POST请求提交数据
@@ -41,7 +52,7 @@ def post_data(url, data):
     返回:
     - 包含响应信息的字典:
       {
-        'status_code': HTTP状态码,
+        'status_code': HTTP状态码,a
         'response_json': 响应的JSON数据(如果有),
         'success': 请求是否成功(状态码为2xx)
       }
@@ -49,14 +60,18 @@ def post_data(url, data):
     # 请在下方编写代码
     # 使用requests.post()发送POST请求
     # 返回包含状态码、响应JSON和成功标志的字典
-    json_data = {"userNo": "admin", "password": "123456", "deviceType": "web"}
-    Login_Url = 'https://nebula.regentxcx.com/manager/auth/accessToken'
-    Authorization = requests.post(url=Login_Url, json=json_data).json().get("data")["token"]
-    Refreshtoken = 'f4f1d9c9b01b486e9f7a7f9d8256f235'
-    headers = {"Authorization": Authorization, "Refreshtoken": Refreshtoken}
-    return requests.post(url=url,json=data,headers=headers)
 
-geturl='http://httpbin.org/get'
-print(get_website_content(geturl))
+    response = requests.post(url, json=data)
+    try:
+        json_data = response.json()
+    except ValueError:
+        json_data = None
+            
+    return {
+            'status_code': response.status_code,
+            'response_json': json_data,
+            'success':response.status_code >= 200 and response.status_code < 300
+            }
 
-print(post_data('https://nebula.regentxcx.com/manager/member/policy/page',{"data":{"memberSystemId":"","moduleId":"120010"},"pageSize":15,"page":1,"moduleId":"120010"}))
+    
+    pass 
